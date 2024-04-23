@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import br.com.lucasfranca.managerpeople.dto.PessoaDTO;
@@ -40,6 +41,14 @@ public class PessoaService {
 		
 		repository.save(pessoa);
 		return modelMapper.map(pessoa, PessoaDTO.class);
+	}
+	
+	public void deletePessoa(Long id) {
+		try {
+			repository.deleteById(id);
+		} catch (DataIntegrityViolationException e) {
+			throw new EntityNotFoundException(e.getMessage());
+		}
 	}
 	
 }

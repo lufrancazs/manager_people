@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import br.com.lucasfranca.managerpeople.dto.EnderecoDTO;
@@ -41,5 +42,13 @@ public class EnderecoService {
 		
 		repository.save(endereco);
 		return modelMapper.map(endereco, EnderecoDTO.class);
+	}
+	
+	public void deleteEndereco(Long id) {
+		try {
+			repository.deleteById(id);
+		} catch (DataIntegrityViolationException e) {
+			throw new EntityNotFoundException(e.getMessage());
+		}
 	}
 }
