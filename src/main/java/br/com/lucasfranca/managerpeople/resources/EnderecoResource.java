@@ -13,33 +13,34 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import br.com.lucasfranca.managerpeople.dto.PessoaDTO;
-import br.com.lucasfranca.managerpeople.services.PessoaService;
+import br.com.lucasfranca.managerpeople.dto.EnderecoDTO;
+import br.com.lucasfranca.managerpeople.services.EnderecoService;
 
 @RestController
-@RequestMapping(value="/pessoas")
-public class PessoaResource {
-	
+@RequestMapping(value = "/enderecos")
+public class EnderecoResource {
+
 	@Autowired
-	private PessoaService service;
-	
+	private EnderecoService service;
+
 	@GetMapping
-	public List<PessoaDTO> findAll(){
+	public List<EnderecoDTO> findAll() {
 		return service.findAll();
 	}
-	
+
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<PessoaDTO> findById(@PathVariable Long id){
-		PessoaDTO dto = service.findById(id);
+	public ResponseEntity<EnderecoDTO> findById(@PathVariable Long id) {
+		EnderecoDTO dto = service.findById(id);
 		return ResponseEntity.ok().body(dto);
 	}
-	
+
 	@PostMapping
-	public ResponseEntity<PessoaDTO> insertPessoa(@RequestBody PessoaDTO pessoa){
-		pessoa = service.insertPessoa(pessoa);
-		
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(pessoa.getId()).toUri();
-		
-		return ResponseEntity.created(uri).body(pessoa);
+	public ResponseEntity<EnderecoDTO> insertEndereco(@RequestBody EnderecoDTO endereco) {
+		endereco = service.insertEndereco(endereco);
+
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(endereco.getId()).toUri();
+
+		return ResponseEntity.created(uri).body(endereco);
 	}
+
 }

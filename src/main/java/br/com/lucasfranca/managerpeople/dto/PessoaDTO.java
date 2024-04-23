@@ -11,6 +11,8 @@ public class PessoaDTO implements Serializable{
 	private String nome;
 	private LocalDate dataNascimento;
 	
+	private Long enderecoPrincipalId;
+	
 	public PessoaDTO() {
 
 	}
@@ -45,7 +47,15 @@ public class PessoaDTO implements Serializable{
 	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
-	
+
+	public Long getEnderecoPrincipalId() {
+		return enderecoPrincipalId;
+	}
+
+	public void setEnderecoPrincipalId(Long enderecoPrincipalId) {
+		this.enderecoPrincipalId = enderecoPrincipalId;
+	}
+
 	
 
 }

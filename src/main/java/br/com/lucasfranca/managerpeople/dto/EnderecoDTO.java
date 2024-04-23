@@ -13,11 +13,13 @@ public class EnderecoDTO implements Serializable{
 	private String pais;
 	private String codigoPostal;
 	
+	private PessoaDTO pessoa;
+	
 	public EnderecoDTO() {
 		
 	}
 
-	public EnderecoDTO(Long id, String logradouro, String cidade, String estado, String pais, String codigoPostal) {
+	public EnderecoDTO(Long id, String logradouro, String cidade, String estado, String pais, String codigoPostal, PessoaDTO pessoa) {
 		super();
 		this.id = id;
 		this.logradouro = logradouro;
@@ -25,6 +27,7 @@ public class EnderecoDTO implements Serializable{
 		this.estado = estado;
 		this.pais = pais;
 		this.codigoPostal = codigoPostal;
+		this.pessoa = pessoa;
 	}
 
 	public Long getId() {
@@ -73,6 +76,14 @@ public class EnderecoDTO implements Serializable{
 
 	public void setCodigoPostal(String codigoPostal) {
 		this.codigoPostal = codigoPostal;
+	}
+
+	public PessoaDTO getPessoa() {
+		return pessoa;
+	}
+
+	public void setPessoa(PessoaDTO pessoa) {
+		this.pessoa = pessoa;
 	}
 	
 	

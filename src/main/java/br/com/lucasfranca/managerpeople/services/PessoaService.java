@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.lucasfranca.managerpeople.dto.PessoaDTO;
+import br.com.lucasfranca.managerpeople.entities.Pessoa;
 import br.com.lucasfranca.managerpeople.repositories.PessoaRepository;
+import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class PessoaService {
@@ -25,4 +27,19 @@ public class PessoaService {
 				 .map(p -> modelMapper.map(p, PessoaDTO.class))
 				 .collect(Collectors.toList());	
 		 }
+	
+	public PessoaDTO findById(Long id) {
+		Pessoa pessoa = repository.findById(id)
+				.orElseThrow(EntityNotFoundException::new);
+		
+		return modelMapper.map(pessoa, PessoaDTO.class);
+	}
+	
+	public PessoaDTO insertPessoa(PessoaDTO dto) {
+		Pessoa pessoa = modelMapper.map(dto, Pessoa.class);
+		
+		repository.save(pessoa);
+		return modelMapper.map(pessoa, PessoaDTO.class);
+	}
+	
 }
