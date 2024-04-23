@@ -6,14 +6,27 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="tb_pessoa")
 public class Pessoa implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nome;
 	private LocalDate dataNascimento;
 	
+	@OneToMany(cascade = CascadeType.PERSIST, mappedBy = "pessoa")
 	private List<Endereco> endereco = new ArrayList<>();
 	
 	public Pessoa() {
