@@ -29,6 +29,8 @@ public class Pessoa implements Serializable{
 	@OneToMany(cascade = CascadeType.PERSIST, mappedBy = "pessoa")
 	private List<Endereco> endereco = new ArrayList<>();
 	
+	private Long enderecoPrincipalId;
+	
 	public Pessoa() {
 		
 	}
@@ -66,6 +68,10 @@ public class Pessoa implements Serializable{
 
 	public List<Endereco> getEndereco() {
 		return endereco;
+	}
+	
+	public Long getEnderecoPrincipalId() {
+		return enderecoPrincipalId;
 	}
 
 	@Override

@@ -1,22 +1,25 @@
 package br.com.lucasfranca.managerpeople.resources;
 
-import java.time.LocalDate;
+import java.util.List;
 
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.lucasfranca.managerpeople.entities.Pessoa;
+import br.com.lucasfranca.managerpeople.dto.PessoaDTO;
+import br.com.lucasfranca.managerpeople.services.PessoaService;
 
 @RestController
 @RequestMapping(value="/pessoas")
 public class PessoaResource {
 	
+	@Autowired
+	private PessoaService service;
+	
 	@GetMapping
-	public ResponseEntity<Pessoa> findAll(){
-		Pessoa p = new Pessoa(1L, "Maria", LocalDate.parse("2020-10-10"));
-		return ResponseEntity.ok().body(p);
+	public List<PessoaDTO> findAll(){
+		return service.findAll();
 	}
 
 }
