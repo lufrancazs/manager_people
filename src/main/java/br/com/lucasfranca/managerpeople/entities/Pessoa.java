@@ -12,7 +12,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -31,10 +30,6 @@ public class Pessoa implements Serializable{
 	@JsonIgnore
 	@OneToMany(mappedBy = "pessoa")
 	private List<Endereco> endereco = new ArrayList<>();
-	
-	
-	@JoinColumn(name = "endereco_id")
-	private Long enderecoPrincipalId;
 	
 	public Pessoa() {
 		
@@ -73,14 +68,6 @@ public class Pessoa implements Serializable{
 
 	public List<Endereco> getEndereco() {
 		return endereco;
-	}
-	
-	public void setEnderecoPrincipalId(Long enderecoPrincipalId) {
-		this.enderecoPrincipalId = enderecoPrincipalId;
-	}
-	
-	public Long getEnderecoPrincipalId() {
-		return enderecoPrincipalId;
 	}
 
 	@Override

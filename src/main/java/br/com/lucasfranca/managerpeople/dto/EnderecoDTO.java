@@ -7,6 +7,7 @@ public class EnderecoDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private Long id;
+	private boolean principal;
 	private String logradouro;
 	private String cidade;
 	private String estado;
@@ -19,9 +20,10 @@ public class EnderecoDTO implements Serializable{
 		
 	}
 
-	public EnderecoDTO(Long id, String logradouro, String cidade, String estado, String pais, String codigoPostal, PessoaDTO pessoa) {
+	public EnderecoDTO(Long id, boolean principal, String logradouro, String cidade, String estado, String pais, String codigoPostal, PessoaDTO pessoa) {
 		super();
 		this.id = id;
+		this.principal = principal;
 		this.logradouro = logradouro;
 		this.cidade = cidade;
 		this.estado = estado;
@@ -36,6 +38,14 @@ public class EnderecoDTO implements Serializable{
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	public boolean getPrincipal() {
+		return principal;
+	}
+	
+	public void setPrincipal(boolean principal) {
+		this.principal = principal;
 	}
 
 	public String getLogradouro() {

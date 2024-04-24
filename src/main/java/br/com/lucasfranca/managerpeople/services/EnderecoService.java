@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.lucasfranca.managerpeople.dto.EnderecoDTO;
 import br.com.lucasfranca.managerpeople.entities.Endereco;
+import br.com.lucasfranca.managerpeople.entities.Pessoa;
 import br.com.lucasfranca.managerpeople.repositories.EnderecoRepository;
 import jakarta.persistence.EntityNotFoundException;
 
@@ -39,6 +40,22 @@ public class EnderecoService {
 	
 	public EnderecoDTO insertEndereco(EnderecoDTO dto) {
 		Endereco endereco = modelMapper.map(dto, Endereco.class);
+		
+		repository.save(endereco);
+		return modelMapper.map(endereco, EnderecoDTO.class);
+	}
+	
+	public EnderecoDTO insertEnderecoPessoa(Long pessoaId, EnderecoDTO dto) {
+		List<Endereco> enderecos = repository.findByPessoaId(pessoaId);
+		Endereco endereco = modelMapper.map(dto, Endereco.class);
+		
+		if(enderecos.isEmpty()) {
+			endereco.setPrincipal(true);
+		}
+		
+		Pessoa pessoa = new Pessoa();
+		pessoa.setId(pessoaId);
+		endereco.setPessoa(pessoa);
 		
 		repository.save(endereco);
 		return modelMapper.map(endereco, EnderecoDTO.class);

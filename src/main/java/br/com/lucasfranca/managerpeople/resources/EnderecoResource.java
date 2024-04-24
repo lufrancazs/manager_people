@@ -44,6 +44,15 @@ public class EnderecoResource {
 		return ResponseEntity.created(uri).body(endereco);
 	}
 	
+	@PostMapping(value = "/{pessoaId}")
+	public ResponseEntity<EnderecoDTO> insertEnderecoPessoa(@PathVariable Long pessoaId, @RequestBody EnderecoDTO endereco){
+		endereco = service.insertEnderecoPessoa(pessoaId, endereco);
+		
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(endereco.getId()).toUri();
+
+		return ResponseEntity.created(uri).body(endereco);
+	}
+	
 	@DeleteMapping(value = "{id}")
 	public ResponseEntity<Void> deletePessoa(@PathVariable Long id){
 		

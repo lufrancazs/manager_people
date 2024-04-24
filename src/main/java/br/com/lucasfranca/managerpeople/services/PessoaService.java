@@ -51,4 +51,21 @@ public class PessoaService {
 		}
 	}
 	
+	public PessoaDTO updatePessoa(Long id, PessoaDTO dto) {
+		
+			Pessoa pessoa = repository.getReferenceById(id);
+			
+			if (pessoa == null) {
+				throw new EntityNotFoundException();
+			}
+			
+			updateData(pessoa, dto);
+			return modelMapper.map(repository.save(pessoa), PessoaDTO.class);
+	}
+	
+	private void updateData(Pessoa pessoa, PessoaDTO dto) {
+		pessoa.setNome(dto.getNome());
+		pessoa.setDataNascimento(dto.getDataNascimento());
+	}
+	
 }
