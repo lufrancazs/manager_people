@@ -26,8 +26,9 @@ public class PessoaResource {
 	private PessoaService service;
 	
 	@GetMapping
-	public List<PessoaDTO> findAll(){
-		return service.findAll();
+	public ResponseEntity<List<PessoaDTO>> findAll(){
+		List<PessoaDTO> list = service.findAll();
+		return ResponseEntity.ok().body(list);
 	}
 	
 	@GetMapping(value = "/{id}")

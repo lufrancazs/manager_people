@@ -20,7 +20,7 @@ public class Endereco implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private boolean principal;
+	private boolean enderecoPrincipal;
 	private String logradouro;
 	private String cidade;
 	private String estado;
@@ -35,11 +35,10 @@ public class Endereco implements Serializable{
 		
 	}
 	
-	
-	public Endereco(Long id, boolean principal,String logradouro, String cidade, String estado, String pais, String codigoPostal, Pessoa pessoa) {
+	public Endereco(Long id, boolean enderecoPrincipal, String logradouro, String cidade, String estado, String pais, String codigoPostal, Pessoa pessoa) {
 		super();
 		this.id = id;
-		this.principal = principal;
+		this.enderecoPrincipal = enderecoPrincipal;
 		this.logradouro = logradouro;
 		this.cidade = cidade;
 		this.estado = estado;
@@ -57,12 +56,12 @@ public class Endereco implements Serializable{
 		this.id = id;
 	}
 	
-	public boolean getPrincipal() {
-		return principal;
+	public boolean isEnderecoPrincipal() {
+		return enderecoPrincipal;
 	}
 	
-	public void setPrincipal(boolean principal) {
-		this.principal = principal;
+	public void setEnderecoPrincipal(boolean enderecoPrincipal) {
+		this.enderecoPrincipal = enderecoPrincipal;
 	}
 
 	public String getLogradouro() {
@@ -113,7 +112,6 @@ public class Endereco implements Serializable{
 	public void setCodigoPostal(String codigoPostal) {
 		this.codigoPostal = codigoPostal;
 	}
-	
 	
 	public Pessoa getPessoa() {
 		return pessoa;

@@ -34,11 +34,10 @@ public class TesteConfig implements CommandLineRunner{
 	pessoaRepository.saveAll(Arrays.asList(p1, p2, p3, p4));
 	
 	Endereco e1 = new Endereco(null, true,"Rua Gasparini, 200", "São Bernardo do Campo", "São Paulo", "Brasil", "09635130", p1);
-	Endereco e2 = new Endereco(null, true,"Av. Senador Vergueiro, 1000", "São Bernardo do Campo", "São Paulo", "Brasil", "09750230", p2);
-	Endereco e3 = new Endereco(null, true,"Av Pres. Kennedy, 800", "São Caetano do Sul", "São Paulo", "Brasil", "09570000", p3);
+	Endereco e2 = new Endereco(null, true, "Av. Senador Vergueiro, 1000", "São Bernardo do Campo", "São Paulo", "Brasil", "09750230", p2);
+	Endereco e3 = new Endereco(null, true, "Av Pres. Kennedy, 800", "São Caetano do Sul", "São Paulo", "Brasil", "09570000", p3);
 	
 	enderecoRepository.saveAll(Arrays.asList(e1, e2, e3));
-	
 	}
 	
 }

@@ -31,7 +31,7 @@ public class PessoaService {
 	
 	public PessoaDTO findById(Long id) {
 		Pessoa pessoa = repository.findById(id)
-				.orElseThrow(EntityNotFoundException::new);
+				.orElseThrow(() -> new EntityNotFoundException("Não encontrado o ID: '" + id + "'"));
 		
 		return modelMapper.map(pessoa, PessoaDTO.class);
 	}

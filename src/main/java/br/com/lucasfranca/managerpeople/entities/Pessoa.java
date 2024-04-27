@@ -2,9 +2,9 @@ package br.com.lucasfranca.managerpeople.entities;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -29,7 +29,7 @@ public class Pessoa implements Serializable{
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "pessoa")
-	private List<Endereco> endereco = new ArrayList<>();
+	private Set<Endereco> endereco = new HashSet<>();
 	
 	public Pessoa() {
 		
@@ -66,7 +66,7 @@ public class Pessoa implements Serializable{
 		this.dataNascimento = dataNascimento;
 	}
 
-	public List<Endereco> getEndereco() {
+	public Set<Endereco> getEndereco() {
 		return endereco;
 	}
 

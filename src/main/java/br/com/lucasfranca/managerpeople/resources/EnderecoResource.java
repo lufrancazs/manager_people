@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,13 +26,21 @@ public class EnderecoResource {
 	private EnderecoService service;
 
 	@GetMapping
-	public List<EnderecoDTO> findAll() {
-		return service.findAll();
+	public ResponseEntity<List<EnderecoDTO>> findAll() {
+		List<EnderecoDTO> list = service.findAll();
+		return ResponseEntity.ok().body(list);
 	}
 
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<EnderecoDTO> findById(@PathVariable Long id) {
 		EnderecoDTO dto = service.findById(id);
+		return ResponseEntity.ok().body(dto);
+	}
+	
+	
+	@GetMapping(value = "/principal/pessoas/{pessoaId}")
+	public ResponseEntity<EnderecoDTO> findEnderecoPrincipal(@PathVariable Long pessoaId) {
+		EnderecoDTO dto = service.findEnderecoPrincipal(pessoaId);
 		return ResponseEntity.ok().body(dto);
 	}
 
@@ -58,6 +67,12 @@ public class EnderecoResource {
 		
 		service.deleteEndereco(id);
 		return ResponseEntity.noContent().build();
+	}
+	
+	@PutMapping(value = "{id}")
+	public ResponseEntity<EnderecoDTO> updateEndereco(@PathVariable Long id, @RequestBody EnderecoDTO dto){
+		dto = service.updateEndereco(id, dto);
+		return ResponseEntity.ok().body(dto);
 	}
 
 }

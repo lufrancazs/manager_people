@@ -2,6 +2,7 @@ package br.com.lucasfranca.managerpeople.dto;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Set;
 
 public class PessoaDTO implements Serializable{
 	
@@ -10,6 +11,8 @@ public class PessoaDTO implements Serializable{
 	private Long id;
 	private String nome;
 	private LocalDate dataNascimento;
+	
+	private Set<EnderecoDTO> endereco;
 	
 	public PessoaDTO() {
 
@@ -44,6 +47,18 @@ public class PessoaDTO implements Serializable{
 
 	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
-	}	
+	}
+
+
+	public Set<EnderecoDTO> getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Set<EnderecoDTO> endereco) {
+		this.endereco = endereco;
+	}
+	
+	
+	
 
 }

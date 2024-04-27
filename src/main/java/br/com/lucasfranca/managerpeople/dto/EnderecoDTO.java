@@ -7,29 +7,27 @@ public class EnderecoDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private Long id;
-	private boolean principal;
+	private boolean enderecoPrincipal;
 	private String logradouro;
 	private String cidade;
 	private String estado;
 	private String pais;
 	private String codigoPostal;
 	
-	private PessoaDTO pessoa;
 	
 	public EnderecoDTO() {
 		
 	}
 
-	public EnderecoDTO(Long id, boolean principal, String logradouro, String cidade, String estado, String pais, String codigoPostal, PessoaDTO pessoa) {
+	public EnderecoDTO(Long id, boolean enderecoPrincipal, String logradouro, String cidade, String estado, String pais, String codigoPostal) {
 		super();
 		this.id = id;
-		this.principal = principal;
+		this.enderecoPrincipal = enderecoPrincipal;
 		this.logradouro = logradouro;
 		this.cidade = cidade;
 		this.estado = estado;
 		this.pais = pais;
 		this.codigoPostal = codigoPostal;
-		this.pessoa = pessoa;
 	}
 
 	public Long getId() {
@@ -39,13 +37,13 @@ public class EnderecoDTO implements Serializable{
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
-	public boolean getPrincipal() {
-		return principal;
+
+	public boolean isEnderecoPrincipal() {
+		return enderecoPrincipal;
 	}
-	
-	public void setPrincipal(boolean principal) {
-		this.principal = principal;
+
+	public void setEnderecoPrincipal(boolean enderecoPrincipal) {
+		this.enderecoPrincipal = enderecoPrincipal;
 	}
 
 	public String getLogradouro() {
@@ -86,16 +84,7 @@ public class EnderecoDTO implements Serializable{
 
 	public void setCodigoPostal(String codigoPostal) {
 		this.codigoPostal = codigoPostal;
-	}
-
-	public PessoaDTO getPessoa() {
-		return pessoa;
-	}
-
-	public void setPessoa(PessoaDTO pessoa) {
-		this.pessoa = pessoa;
-	}
-	
+	}	
 	
 
 }
