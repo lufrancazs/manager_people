@@ -56,15 +56,13 @@ public class PessoaService {
 	}
 	
 	public PessoaDTO updatePessoa(Long id, PessoaDTO dto) {
-		
+		try {
 			Pessoa pessoa = repository.getReferenceById(id);
-			
-			if (pessoa == null) {
-				throw new EntityNotFoundException();
-			}
-			
 			updateData(pessoa, dto);
 			return modelMapper.map(repository.save(pessoa), PessoaDTO.class);
+		}catch(EntityNotFoundException e){
+			throw new ResourceNotFoundException(e.getMessage());
+		}
 	}
 	
 	private void updateData(Pessoa pessoa, PessoaDTO dto) {

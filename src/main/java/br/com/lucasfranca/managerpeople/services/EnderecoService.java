@@ -81,7 +81,7 @@ public class EnderecoService {
 	}
 
 	public EnderecoDTO updateEndereco(Long id, EnderecoDTO dto) {
-
+		try {
 		Endereco endereco = repository.getReferenceById(id);
 
 		if (endereco == null) {
@@ -90,6 +90,11 @@ public class EnderecoService {
 
 		updateData(endereco, dto);
 		return modelMapper.map(repository.save(endereco), EnderecoDTO.class);
+		}
+		
+		catch(EntityNotFoundException e){
+			throw new ResourceNotFoundException(e.getMessage());
+		}
 	}
 
 	private void updateData(Endereco endereco, EnderecoDTO dto) {
