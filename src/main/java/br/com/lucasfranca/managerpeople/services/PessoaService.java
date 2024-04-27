@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import br.com.lucasfranca.managerpeople.dto.PessoaDTO;
 import br.com.lucasfranca.managerpeople.entities.Pessoa;
 import br.com.lucasfranca.managerpeople.repositories.PessoaRepository;
+import br.com.lucasfranca.managerpeople.services.exceptions.DatabaseException;
 import br.com.lucasfranca.managerpeople.services.exceptions.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
 
@@ -46,10 +47,12 @@ public class PessoaService {
 	
 	public void deletePessoa(Long id) {
 		try {
-			repository.deleteById(id);
-		} catch (DataIntegrityViolationException e) {
-			throw new EntityNotFoundException(e.getMessage());
+		repository.deleteById(id);
 		}
+		catch(DataIntegrityViolationException e) {
+			throw new DatabaseException(e.getMessage());
+		}
+
 	}
 	
 	public PessoaDTO updatePessoa(Long id, PessoaDTO dto) {

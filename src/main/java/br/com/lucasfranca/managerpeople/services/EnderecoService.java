@@ -13,6 +13,7 @@ import br.com.lucasfranca.managerpeople.entities.Endereco;
 import br.com.lucasfranca.managerpeople.entities.Pessoa;
 import br.com.lucasfranca.managerpeople.repositories.EnderecoRepository;
 import br.com.lucasfranca.managerpeople.repositories.PessoaRepository;
+import br.com.lucasfranca.managerpeople.services.exceptions.DatabaseException;
 import br.com.lucasfranca.managerpeople.services.exceptions.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
 
@@ -21,10 +22,9 @@ public class EnderecoService {
 
 	@Autowired
 	private EnderecoRepository repository;
-	
+
 	@Autowired
-	private PessoaRepository pessoaRepository;	
-	
+	private PessoaRepository pessoaRepository;
 
 	@Autowired
 	private ModelMapper modelMapper;
@@ -35,22 +35,17 @@ public class EnderecoService {
 	}
 
 	public EnderecoDTO findById(Long id) {
-		Endereco endereco = repository.findById(id)
-				.orElseThrow(() -> new ResourceNotFoundException(id));
+		Endereco endereco = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id));
 
 		return modelMapper.map(endereco, EnderecoDTO.class);
 	}
-	
+
 	public EnderecoDTO findEnderecoPrincipal(Long id) {
-		Pessoa pessoa = pessoaRepository.findById(id)
+		Pessoa pessoa = pessoaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id));
+
+		Endereco enderecoPrincipal = pessoa.getEndereco().stream().filter(Endereco::isEnderecoPrincipal).findFirst()
 				.orElseThrow(() -> new ResourceNotFoundException(id));
-		
-		
-		Endereco enderecoPrincipal = pessoa.getEndereco().stream()
-				.filter(Endereco::isEnderecoPrincipal)
-				.findFirst()
-				.orElseThrow(() -> new ResourceNotFoundException(id));
-		
+
 		return modelMapper.map(enderecoPrincipal, EnderecoDTO.class);
 	}
 
@@ -81,7 +76,7 @@ public class EnderecoService {
 		try {
 			repository.deleteById(id);
 		} catch (DataIntegrityViolationException e) {
-			throw new EntityNotFoundException(e.getMessage());
+			throw new DatabaseException(e.getMessage());
 		}
 	}
 
@@ -105,5 +100,5 @@ public class EnderecoService {
 		endereco.setPais(dto.getPais());
 		endereco.setCodigoPostal(dto.getCodigoPostal());
 	}
-	
+
 }
