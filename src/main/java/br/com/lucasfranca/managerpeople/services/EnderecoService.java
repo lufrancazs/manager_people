@@ -13,6 +13,7 @@ import br.com.lucasfranca.managerpeople.entities.Endereco;
 import br.com.lucasfranca.managerpeople.entities.Pessoa;
 import br.com.lucasfranca.managerpeople.repositories.EnderecoRepository;
 import br.com.lucasfranca.managerpeople.repositories.PessoaRepository;
+import br.com.lucasfranca.managerpeople.services.exceptions.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
 
 @Service
@@ -35,20 +36,20 @@ public class EnderecoService {
 
 	public EnderecoDTO findById(Long id) {
 		Endereco endereco = repository.findById(id)
-				.orElseThrow(() -> new EntityNotFoundException("Não encontrado o ID: '" + id + "'"));
+				.orElseThrow(() -> new ResourceNotFoundException(id));
 
 		return modelMapper.map(endereco, EnderecoDTO.class);
 	}
 	
 	public EnderecoDTO findEnderecoPrincipal(Long id) {
 		Pessoa pessoa = pessoaRepository.findById(id)
-				.orElseThrow(() -> new EntityNotFoundException("Pessoa não encontrada com ID: " + id));
+				.orElseThrow(() -> new ResourceNotFoundException(id));
 		
 		
 		Endereco enderecoPrincipal = pessoa.getEndereco().stream()
 				.filter(Endereco::isEnderecoPrincipal)
 				.findFirst()
-				.orElseThrow(() -> new EntityNotFoundException("Endereço principal não encontrado para a pessoa com ID: " + id));
+				.orElseThrow(() -> new ResourceNotFoundException(id));
 		
 		return modelMapper.map(enderecoPrincipal, EnderecoDTO.class);
 	}

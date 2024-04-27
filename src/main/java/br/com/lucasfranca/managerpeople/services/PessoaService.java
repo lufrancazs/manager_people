@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import br.com.lucasfranca.managerpeople.dto.PessoaDTO;
 import br.com.lucasfranca.managerpeople.entities.Pessoa;
 import br.com.lucasfranca.managerpeople.repositories.PessoaRepository;
+import br.com.lucasfranca.managerpeople.services.exceptions.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
 
 @Service
@@ -31,7 +32,7 @@ public class PessoaService {
 	
 	public PessoaDTO findById(Long id) {
 		Pessoa pessoa = repository.findById(id)
-				.orElseThrow(() -> new EntityNotFoundException("Não encontrado o ID: '" + id + "'"));
+				.orElseThrow(() -> new ResourceNotFoundException(id));
 		
 		return modelMapper.map(pessoa, PessoaDTO.class);
 	}
